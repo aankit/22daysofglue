@@ -17,8 +17,8 @@ function preload() {
         return day;
     }
     );
-    font = loadFont('assets/Homemade_Apple/HomemadeApple-Regular.ttf')
-    messages = loadJSON("assets/messages.json", loadImages);
+    font = loadFont('glue_assets/Homemade_Apple/HomemadeApple-Regular.ttf')
+    messages = loadJSON("glue_assets/messages.json", loadImages);
 }
 
 function setup() {

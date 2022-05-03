@@ -17,7 +17,7 @@ function preload() {
         return day;
     }
     );
-    font = loadFont('glue_assets/Homemade_Apple/HomemadeApple-Regular.ttf')
+    font = loadFont("glue_assets/Homemade_Apple/HomemadeApple-Regular.ttf")
     messages = loadJSON("glue_assets/messages.json", loadImages);
 }
 
@@ -56,7 +56,7 @@ function draw() {
         textAlign(CENTER, CENTER);
         stroke(100);
         fill(212, 175, 55);
-        text("22 Days of Glue :", center.x + width / 20, center.y - width / 18);
+        text("22 Days of Poop :", center.x + width / 20, center.y - width / 30);
         text("Advent of the World's", center.x + width / 20, center.y + width / 30);
         text("Cutest Wife & Mom", center.x + width / 20, center.y + width / 8);
         days.forEach((day) => {

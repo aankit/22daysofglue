@@ -1,4 +1,4 @@
-let center, radius, num_days, days, messages, message, dayOfMonth, showMsg
+let center, radius, num_days, days, messages, message, dayOfMonth, showMsg, active_messages, day_message
 
 function preload() {
     num_days = Array.from(Array(22).keys()).map(x => x + 1);
@@ -25,8 +25,8 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
     i = 360 / num_days.length;
     showMsg = false;
-    message = messages.messages.filter((msg) => msg.day === dayOfMonth);
-    message[0].img.resize(width/3,0);
+    active_messages = messages.messages.filter((msg) => msg.day <= dayOfMonth);
+    active_messages.map(m => m.img.resize(width / 3, 0));
 }
 
 function draw() {
@@ -40,16 +40,15 @@ function draw() {
         "y": height / 2.5
     }
     if (showMsg) {
-        // message = messages.messages.filter((msg) => msg.day === dayOfMonth);
         textAlign(LEFT, TOP);
         textFont(font);
         textSize(width / 35);
         stroke(100);
         fill(0);
         textWrap(WORD);
-        textLeading(60);
-        text(message[0].text, width * .05, height * .05, width / 2);
-        image(message[0].img, 1.75 * width / 3, height * .05);
+        textLeading(width / 15);
+        text(day_message.text, width * .05, height * .05, width / 2);
+        image(day_message.img, 1.75 * width / 3, height * .05);
     } else {
         textFont(font);
         textSize(width / 20);
@@ -77,7 +76,7 @@ function draw() {
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
-    message[0].img.resize(width/3,0);
+    active_messages.map(m => m.img.resize(width / 3, 0));
 }
 
 function mouseClicked() {
@@ -85,20 +84,23 @@ function mouseClicked() {
         days.forEach((day) => {
             if (mouseX > day.x && mouseX < day.x + day.l && mouseY > day.y && mouseY < day.y + day.h) {
                 if (day.d <= dayOfMonth) {
+                    day_message = active_messages.filter((msg) => msg.day === day.d)[0];
                     showMsg = true;
                 }
             }
         });
     } else {
         showMsg = false;
+        const d = new Date();
+        dayOfMonth = d.getDate();
     }
 }
 
-function loadImages(messageJSON){
+function loadImages(messageJSON) {
     msgArray = messageJSON.messages
     msgArray.map((m) => {
-        if (m.day <= dayOfMonth){
-            img = loadImage("images/"+ m.img_file);
+        if (m.day <= dayOfMonth) {
+            img = loadImage("images/" + m.img_file);
             m.img = img;
         }
     });

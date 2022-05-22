@@ -3,8 +3,8 @@ let center, radius, num_days, days, messages, message, dayOfMonth, showMsg, acti
 function preload() {
     num_days = Array.from(Array(22).keys()).map(x => x + 1);
     const d = new Date();
-    dayOfMonth = d.getDate();
-    // dayOfMonth = 2;
+    // dayOfMonth = d.getDate();
+    dayOfMonth = 22;
     days = num_days.map((d) => {
         img = loadImage("images/day-" + d + ".png");
         day = {
@@ -92,7 +92,8 @@ function mouseClicked() {
     } else {
         showMsg = false;
         const d = new Date();
-        dayOfMonth = d.getDate();
+        // dayOfMonth = d.getDate();
+        dayOfMonth = 22;
     }
 }
 
